@@ -20,8 +20,6 @@ public class MSplashAdHolder {
 
     private static MSplashAdHolder sMSplashAdHolder;
 
-    private String androidId;
-    private String token;
 
     public OnAdClickEvent mOnAdClickEvent;
 
@@ -51,7 +49,6 @@ public class MSplashAdHolder {
                 if (ttSplashAdLoadCallback != null) {
                     ttSplashAdLoadCallback.onSplashAdLoadFail(adError);
                 }
-                ErrorUploadUtil.getInstance().upLoadSdkError(adError.message,adError.code,adError.thirdSdkErrorCode,adError.thirdSdkErrorMessage);
             }
 
             @Override

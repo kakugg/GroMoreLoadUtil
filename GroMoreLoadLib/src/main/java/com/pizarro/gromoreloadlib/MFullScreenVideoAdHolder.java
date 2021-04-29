@@ -51,7 +51,6 @@ public class MFullScreenVideoAdHolder {
                 if (ttFullVideoAdLoadCallback != null) {
                     ttFullVideoAdLoadCallback.onFullVideoLoadFail(adError);
                 }
-                ErrorUploadUtil.getInstance().upLoadSdkError(adError.message,adError.code,adError.thirdSdkErrorCode,adError.thirdSdkErrorMessage);
             }
 
             @Override

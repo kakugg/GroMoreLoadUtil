@@ -64,7 +64,6 @@ public class MRewardVideoAdHolder {
                 if (ttRewardedAdLoadCallback != null) {
                     ttRewardedAdLoadCallback.onRewardVideoLoadFail(adError);
                 }
-                ErrorUploadUtil.getInstance().upLoadSdkError(adError.message, adError.code, adError.thirdSdkErrorCode, adError.thirdSdkErrorMessage);
             }
 
             @Override
