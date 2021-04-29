@@ -13,6 +13,7 @@ import com.bytedance.msdk.api.nativeAd.TTNativeAdLoadCallback;
 import com.bytedance.msdk.api.nativeAd.TTNativeExpressAdListener;
 import com.bytedance.msdk.api.nativeAd.TTUnifiedNativeAd;
 import com.pizarro.gromoreloadlib.listener.OnAdClickEvent;
+import com.pizarro.gromoreloadlib.listener.OnAdLoadErrorEvent;
 import com.pizarro.gromoreloadlib.model.NativeExpressPlacementModel;
 
 import java.util.List;
@@ -26,6 +27,11 @@ public class MNativeAdHolder {
     public static MNativeAdHolder sMNativeAdHolder;
 
     public OnAdClickEvent mOnAdClickEvent;
+    public OnAdLoadErrorEvent mOnAdLoadErrorEvent;
+
+    public void setOnAdLoadErrorEvent(OnAdLoadErrorEvent onAdLoadErrorEvent) {
+        mOnAdLoadErrorEvent = onAdLoadErrorEvent;
+    }
 
     public void setOnAdClickEvent(OnAdClickEvent onAdClickEvent) {
         mOnAdClickEvent = onAdClickEvent;
@@ -130,6 +136,9 @@ public class MNativeAdHolder {
             public void onAdLoadedFial(AdError adError) {
                 if (ttNativeAdLoadCallback != null) {
                     ttNativeAdLoadCallback.onAdLoadedFial(adError);
+                }
+                if (mOnAdLoadErrorEvent != null){
+                    mOnAdLoadErrorEvent.onAdLoadError("nativeExpress",adError);
                 }
             }
         });

@@ -11,6 +11,7 @@ import com.bytedance.msdk.api.splash.TTSplashAd;
 import com.bytedance.msdk.api.splash.TTSplashAdListener;
 import com.bytedance.msdk.api.splash.TTSplashAdLoadCallback;
 import com.pizarro.gromoreloadlib.listener.OnAdClickEvent;
+import com.pizarro.gromoreloadlib.listener.OnAdLoadErrorEvent;
 
 /**
  * Created by Irving
@@ -20,8 +21,12 @@ public class MSplashAdHolder {
 
     private static MSplashAdHolder sMSplashAdHolder;
 
-
     public OnAdClickEvent mOnAdClickEvent;
+    public OnAdLoadErrorEvent mOnAdLoadErrorEvent;
+
+    public void setOnAdLoadErrorEvent(OnAdLoadErrorEvent onAdLoadErrorEvent) {
+        mOnAdLoadErrorEvent = onAdLoadErrorEvent;
+    }
 
     public void setOnAdClickEvent(OnAdClickEvent onAdClickEvent) {
         mOnAdClickEvent = onAdClickEvent;
@@ -48,6 +53,9 @@ public class MSplashAdHolder {
             public void onSplashAdLoadFail(AdError adError) {
                 if (ttSplashAdLoadCallback != null) {
                     ttSplashAdLoadCallback.onSplashAdLoadFail(adError);
+                }
+                if (mOnAdLoadErrorEvent != null){
+                    mOnAdLoadErrorEvent.onAdLoadError("splash",adError);
                 }
             }
 

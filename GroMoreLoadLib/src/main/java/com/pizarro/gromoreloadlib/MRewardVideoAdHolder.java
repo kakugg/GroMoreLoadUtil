@@ -11,6 +11,7 @@ import com.bytedance.msdk.api.reward.TTRewardAd;
 import com.bytedance.msdk.api.reward.TTRewardedAdListener;
 import com.bytedance.msdk.api.reward.TTRewardedAdLoadCallback;
 import com.pizarro.gromoreloadlib.listener.OnAdClickEvent;
+import com.pizarro.gromoreloadlib.listener.OnAdLoadErrorEvent;
 
 /**
  * Created by Irving
@@ -23,6 +24,11 @@ public class MRewardVideoAdHolder {
     private String mUserId;
 
     public OnAdClickEvent mOnAdClickEvent;
+    public OnAdLoadErrorEvent mOnAdLoadErrorEvent;
+
+    public void setOnAdLoadErrorEvent(OnAdLoadErrorEvent onAdLoadErrorEvent) {
+        mOnAdLoadErrorEvent = onAdLoadErrorEvent;
+    }
 
     public void setOnAdClickEvent(OnAdClickEvent onAdClickEvent) {
         mOnAdClickEvent = onAdClickEvent;
@@ -63,6 +69,9 @@ public class MRewardVideoAdHolder {
             public void onRewardVideoLoadFail(AdError adError) {
                 if (ttRewardedAdLoadCallback != null) {
                     ttRewardedAdLoadCallback.onRewardVideoLoadFail(adError);
+                }
+                if (mOnAdLoadErrorEvent != null){
+                    mOnAdLoadErrorEvent.onAdLoadError("rewardVideo",adError);
                 }
             }
 

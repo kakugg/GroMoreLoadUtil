@@ -11,6 +11,7 @@ import com.bytedance.msdk.api.reward.TTRewardedAdLoadCallback;
 import com.bytedance.msdk.api.splash.TTSplashAdListener;
 import com.bytedance.msdk.api.splash.TTSplashAdLoadCallback;
 import com.pizarro.gromoreloadlib.listener.OnAdClickEvent;
+import com.pizarro.gromoreloadlib.listener.OnAdLoadErrorEvent;
 import com.pizarro.gromoreloadlib.model.NativeExpressPlacementModel;
 
 /**
@@ -26,19 +27,30 @@ public class MAdHolder {
     private boolean isAdOpened = true;
 
     public OnAdClickEvent mOnAdClickEvent;
+    public OnAdLoadErrorEvent mOnAdLoadErrorEvent;
 
-    public void init(){
+    public void init() {
 
     }
 
     public void setOnAdClickEvent(OnAdClickEvent onAdClickEvent) {
         mOnAdClickEvent = onAdClickEvent;
-//        MBannerAdHolder.getInstance(mUserId).setOnAdClickEvent(mOnAdClickEvent);
-//        MInterstitialAdHolder.getInstance(mUserId).setOnAdClickEvent(mOnAdClickEvent);
+        MBannerAdHolder.getInstance().setOnAdClickEvent(mOnAdClickEvent);
+        MInterstitialAdHolder.getInstance().setOnAdClickEvent(mOnAdClickEvent);
         MRewardVideoAdHolder.getInstance(mUserId).setOnAdClickEvent(mOnAdClickEvent);
         MSplashAdHolder.getInstance().setOnAdClickEvent(mOnAdClickEvent);
         MFullScreenVideoAdHolder.getInstance(mUserId).setOnAdClickEvent(mOnAdClickEvent);
         MNativeAdHolder.getInstance().setOnAdClickEvent(mOnAdClickEvent);
+    }
+
+    public void setOnAdLoadErrorEvent(OnAdLoadErrorEvent onAdLoadErrorEvent) {
+        mOnAdLoadErrorEvent = onAdLoadErrorEvent;
+        MBannerAdHolder.getInstance().setOnAdLoadErrorEvent(mOnAdLoadErrorEvent);
+        MInterstitialAdHolder.getInstance().setOnAdLoadErrorEvent(mOnAdLoadErrorEvent);
+        MRewardVideoAdHolder.getInstance(mUserId).setOnAdLoadErrorEvent(mOnAdLoadErrorEvent);
+        MSplashAdHolder.getInstance().setOnAdLoadErrorEvent(mOnAdLoadErrorEvent);
+        MFullScreenVideoAdHolder.getInstance(mUserId).setOnAdLoadErrorEvent(mOnAdLoadErrorEvent);
+        MNativeAdHolder.getInstance().setOnAdLoadErrorEvent(mOnAdLoadErrorEvent);
     }
 
 

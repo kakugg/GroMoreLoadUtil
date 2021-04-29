@@ -9,6 +9,7 @@ import com.bytedance.msdk.api.fullVideo.TTFullVideoAd;
 import com.bytedance.msdk.api.fullVideo.TTFullVideoAdListener;
 import com.bytedance.msdk.api.fullVideo.TTFullVideoAdLoadCallback;
 import com.pizarro.gromoreloadlib.listener.OnAdClickEvent;
+import com.pizarro.gromoreloadlib.listener.OnAdLoadErrorEvent;
 
 /**
  * Created by Irving
@@ -21,10 +22,16 @@ public class MFullScreenVideoAdHolder {
     private static MFullScreenVideoAdHolder sMFullScreenVideoAdHolder;
 
     public OnAdClickEvent mOnAdClickEvent;
+    public OnAdLoadErrorEvent mOnAdLoadErrorEvent;
+
+    public void setOnAdLoadErrorEvent(OnAdLoadErrorEvent onAdLoadErrorEvent) {
+        mOnAdLoadErrorEvent = onAdLoadErrorEvent;
+    }
 
     public void setOnAdClickEvent(OnAdClickEvent onAdClickEvent) {
         mOnAdClickEvent = onAdClickEvent;
     }
+
     private MFullScreenVideoAdHolder(String userId) {
         this.userId = userId;
     }
@@ -50,6 +57,9 @@ public class MFullScreenVideoAdHolder {
             public void onFullVideoLoadFail(AdError adError) {
                 if (ttFullVideoAdLoadCallback != null) {
                     ttFullVideoAdLoadCallback.onFullVideoLoadFail(adError);
+                }
+                if (mOnAdLoadErrorEvent != null){
+                    mOnAdLoadErrorEvent.onAdLoadError("fullVideo",adError);
                 }
             }
 
