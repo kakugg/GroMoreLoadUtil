@@ -27,6 +27,10 @@ public class MAdHolder {
 
     public OnAdClickEvent mOnAdClickEvent;
 
+    public void init(){
+
+    }
+
     public void setOnAdClickEvent(OnAdClickEvent onAdClickEvent) {
         mOnAdClickEvent = onAdClickEvent;
 //        MBannerAdHolder.getInstance(mUserId).setOnAdClickEvent(mOnAdClickEvent);
